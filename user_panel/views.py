@@ -6,6 +6,12 @@ from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from user_panel.models import CustomUser,Profile,Channel
 from .serializers import UserSerializer,RegisterSerializer,ProfileSerializer,ChannelSerializer
+from django.db.models.signals import post_save
+from django.contrib.auth import get_user_model
+from django.dispatch import receiver
+from content.models import Episode
+from user_panel.models import Channel
+from logger.models import ViewedContent, ViewedChannel
 
 class RegisterUserApi(generics.GenericAPIView):
     serializer_class = RegisterSerializer
@@ -48,3 +54,5 @@ class FollowedChannelAPIView(generics.ListAPIView):
 
     def get_queryset(self):
         return self.request.user.following_channels.all()
+    
+

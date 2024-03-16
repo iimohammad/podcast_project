@@ -7,7 +7,9 @@ urlpatterns = [
     path(ADMIN_URL, admin.site.urls),
     path('',include('home.urls')),
     path('',include('user_panel.urls')),
-    
+    path('content/',include('content.urls')),
+    path('user_activity/',include('user_activity.urls')),
+    path('logger/', include('logger.urls')),
     # SimpleJWT URLs
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
