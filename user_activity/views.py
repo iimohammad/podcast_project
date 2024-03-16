@@ -1,46 +1,29 @@
-from rest_framework import generics, status
-from rest_framework.response import Response
+from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticated
-from content.models import Episode
 from .models import Comment, Like, Playlist, PlaylistItem
-from .serializers import CommentSerializer, LikeSerializer, PlaylistSerializer, PlaylistItemSerializer
+from .serializers import (
+    CommentSerializer,
+    LikeSerializer,
+    PlaylistSerializer,
+    PlaylistItemSerializer,
+)
 
-class CommentCreateAPIView(generics.CreateAPIView):
+class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [IsAuthenticated]
 
-class CommentDeleteAPIView(generics.DestroyAPIView):
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
-    permission_classes = [IsAuthenticated]
-
-class LikeCreateAPIView(generics.CreateAPIView):
+class LikeViewSet(viewsets.ModelViewSet):
     queryset = Like.objects.all()
     serializer_class = LikeSerializer
     permission_classes = [IsAuthenticated]
 
-class LikeDeleteAPIView(generics.DestroyAPIView):
-    queryset = Like.objects.all()
-    serializer_class = LikeSerializer
-    permission_classes = [IsAuthenticated]
-
-class PlaylistCreateAPIView(generics.CreateAPIView):
+class PlaylistViewSet(viewsets.ModelViewSet):
     queryset = Playlist.objects.all()
     serializer_class = PlaylistSerializer
     permission_classes = [IsAuthenticated]
 
-class PlaylistDeleteAPIView(generics.DestroyAPIView):
-    queryset = Playlist.objects.all()
-    serializer_class = PlaylistSerializer
-    permission_classes = [IsAuthenticated]
-
-class PlaylistItemCreateAPIView(generics.CreateAPIView):
-    queryset = PlaylistItem.objects.all()
-    serializer_class = PlaylistItemSerializer
-    permission_classes = [IsAuthenticated]
-
-class PlaylistItemDeleteAPIView(generics.DestroyAPIView):
+class PlaylistItemViewSet(viewsets.ModelViewSet):
     queryset = PlaylistItem.objects.all()
     serializer_class = PlaylistItemSerializer
     permission_classes = [IsAuthenticated]

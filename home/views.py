@@ -1,7 +1,7 @@
-from rest_framework import viewsets
-from .models import Banner
-from .serializers import BannerSerializer
+from django.shortcuts import render
 
-class BannerViewSet(viewsets.ModelViewSet):
-    queryset = Banner.objects.all()
-    serializer_class = BannerSerializer
+
+def home (request):
+    return render(request,'index.html')
+
+

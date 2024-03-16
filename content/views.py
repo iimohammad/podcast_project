@@ -1,15 +1,23 @@
-import statistics
-from rest_framework import generics
+from rest_framework import viewsets, generics, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .models import Episode
 from .serializers import EpisodeSerializer
 
-
-class CreateEpisodeAPIView(generics.CreateAPIView):
+class EpisodeViewSet(viewsets.ModelViewSet):
     queryset = Episode.objects.all()
     serializer_class = EpisodeSerializer
     permission_classes = [IsAuthenticated]
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    def perform_create(self, serializer):
+        serializer.save()
 
 class MentionAPIView(generics.GenericAPIView):
     permission_classes = [IsAuthenticated]
@@ -39,6 +47,4 @@ class EpisodePlaybackAPIView(generics.RetrieveAPIView):
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
         audio_file_url = instance.audio_file.url
-        return Response({'audio_file_url': audio_file_url}, status=statistics.HTTP_200_OK)
-
-
+        return Response({'audio_file_url': audio_file_url}, status=status.HTTP_200_OK)
