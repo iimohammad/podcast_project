@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
-from .models import CustomUser,Profile,Channel
+from .models import CustomUser, Profile, Channel
+
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
@@ -20,7 +21,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'password', 'password_confirm','email', 'phone_number')
+        fields = ('username', 'password', 'password_confirm', 'email', 'phone_number')
         extra_kwargs = {
             'phone_number': {'required': False}
         }

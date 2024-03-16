@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Episode
 from .serializers import EpisodeSerializer
 
+
 class EpisodeViewSet(viewsets.ModelViewSet):
     queryset = Episode.objects.all()
     serializer_class = EpisodeSerializer
@@ -19,12 +20,14 @@ class EpisodeViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save()
 
+
 class MentionAPIView(generics.GenericAPIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         # Your mention logic here
         return Response({'message': 'Mention created successfully'}, status=status.HTTP_200_OK)
+
 
 class ChannelEpisodesAPIView(generics.ListAPIView):
     serializer_class = EpisodeSerializer
@@ -34,10 +37,12 @@ class ChannelEpisodesAPIView(generics.ListAPIView):
         channel_id = self.kwargs['channel_id']
         return Episode.objects.filter(channel_id=channel_id)
 
+
 class EpisodeDetailAPIView(generics.RetrieveAPIView):
     queryset = Episode.objects.all()
     serializer_class = EpisodeSerializer
     permission_classes = [IsAuthenticated]
+
 
 class EpisodePlaybackAPIView(generics.RetrieveAPIView):
     queryset = Episode.objects.all()

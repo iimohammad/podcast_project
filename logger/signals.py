@@ -5,6 +5,7 @@ from content.models import Episode
 from user_panel.models import Channel
 from .models import ViewedContent, ViewedChannel
 
+
 @receiver(post_save, sender=Episode)
 def log_viewed_content(sender, instance, created, **kwargs):
     if created:
@@ -12,6 +13,7 @@ def log_viewed_content(sender, instance, created, **kwargs):
         users = User.objects.all()
         for user in users:
             ViewedContent.objects.create(user=user, episode=instance)
+
 
 @receiver(post_save, sender=Channel)
 def log_viewed_channel(sender, instance, created, **kwargs):

@@ -5,6 +5,7 @@ from .models import ViewedContent, ViewedChannel
 from .serializers import ViewedContentSerializer, ViewedChannelSerializer
 from datetime import datetime
 
+
 class ViewedContentViewSet(viewsets.ModelViewSet):
     queryset = ViewedContent.objects.all()
     serializer_class = ViewedContentSerializer
@@ -12,6 +13,7 @@ class ViewedContentViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user, viewed_at=datetime.now())
+
 
 class ViewedChannelViewSet(viewsets.ModelViewSet):
     queryset = ViewedChannel.objects.all()
