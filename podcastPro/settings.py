@@ -28,14 +28,16 @@ INSTALLED_APPS = [
     # Trusted Apps
     'rest_framework',
     'rest_framework.authtoken',
+    'django_filters',
+    'rest_framework_simplejwt',
 
 
     # My Apps
-    'home.app.HomeConfig',
-    'content.app.ContentConfig',
-    'user_activity.apps.UserActivityConfig',
-    'user_panel.apps.UserPanelConfig',
-    'logger.apps.LoggerConfig',
+    'home',
+    'content',
+    'user_activity',
+    'user_panel',
+    'logger',
 ]
 
 MIDDLEWARE = [
@@ -120,3 +122,15 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'user_panel.CustomUser'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication')
+}
+
+
+LOGIN_URL = '/api-auth/login/'
+LOGIN_REDIRECT_URL = 'user_panel/profile/'
