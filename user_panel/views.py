@@ -2,6 +2,7 @@ from rest_framework import generics, status, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from user_panel.models import CustomUser,Profile,Channel
@@ -28,10 +29,14 @@ class RegisterUserApi(generics.GenericAPIView):
             "user": UserSerializer(user, context=self.get_serializer_context()).data
         })
 
-class UserProfileViewSet(viewsets.ModelViewSet):
+class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Profile.objects.filter(user=self.request.user)
+
 
 class FollowChannelViewSet(viewsets.ViewSet):
     queryset = Channel.objects.all()

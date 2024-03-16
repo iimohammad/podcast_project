@@ -8,6 +8,7 @@ urlpatterns = [
     path('',include('home.urls')),
     path('',include('user_panel.urls')),
     path('content/',include('content.urls')),
+    path('user_panel/',include('user_panel.urls')),
     path('user_activity/',include('user_activity.urls')),
     path('logger/', include('logger.urls')),
     # SimpleJWT URLs

@@ -5,7 +5,7 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register(r'follow', FollowChannelViewSet, basename='follow-channel')
-router.register(r'profile', UserProfileViewSet, basename='user-profile')
+router.register(r'profile', ProfileViewSet, basename='user-profile')
 router.register(r'followed-channels', FollowChannelViewSet, basename='followed-channels')
 urlpatterns = router.urls
 urlpatterns += [
