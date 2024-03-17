@@ -14,13 +14,19 @@ class CustomUserAdmin(UserAdmin):
     fieldsets = ()
 
 
+class FollowedChannelInline(admin.TabularInline):
+    model = Profile.following_channels.through
+    extra = 1
+
+
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'description')
-    search_fields = ('user__username', 'description')
+    # list_display = ['user', 'bio', 'location']
+    # search_fields = ['user__username', 'bio', 'location']
+    # list_filter = ['location']
+    inlines = [FollowedChannelInline]
 
 
 @admin.register(Channel)
 class ChannelAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'owner')
-    search_fields = ('name', 'description', 'owner__username')
+    list_display = ['name','description','owner']

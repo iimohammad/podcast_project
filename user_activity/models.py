@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from content.models import Episode
+from user_panel.models import Channel
 
 User = get_user_model()
 
@@ -28,3 +29,9 @@ class PlaylistItem(models.Model):
     playlist = models.ForeignKey(Playlist, on_delete=models.CASCADE)
     episode = models.ForeignKey(Episode, on_delete=models.CASCADE)
     added_at = models.DateTimeField(auto_now_add=True)
+
+
+class FollowedChannel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    channel = models.ForeignKey(Channel, on_delete=models.CASCADE)
+    followed_at = models.DateTimeField(auto_now_add=True)

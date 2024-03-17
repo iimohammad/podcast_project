@@ -1,21 +1,26 @@
 from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticated
-from .models import Comment, Like, Playlist, PlaylistItem
+from .models import Comment, Like, Playlist, PlaylistItem, FollowedChannel
 from .serializers import (
     CommentSerializer,
     LikeSerializer,
     PlaylistSerializer,
     PlaylistItemSerializer,
+    FollowedChannelSerializer,
 )
 
 
-class CommentViewSet(viewsets.ModelViewSet):
+class CommentViewSet(mixins.CreateModelMixin,
+                     mixins.DestroyModelMixin,
+                     viewsets.GenericViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [IsAuthenticated]
 
 
-class LikeViewSet(viewsets.ModelViewSet):
+class LikeViewSet(mixins.CreateModelMixin,
+                  mixins.DestroyModelMixin,
+                  viewsets.GenericViewSet):
     queryset = Like.objects.all()
     serializer_class = LikeSerializer
     permission_classes = [IsAuthenticated]
@@ -27,7 +32,17 @@ class PlaylistViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
 
-class PlaylistItemViewSet(viewsets.ModelViewSet):
+class PlaylistItemViewSet(mixins.CreateModelMixin,
+                          mixins.DestroyModelMixin,
+                          viewsets.GenericViewSet):
     queryset = PlaylistItem.objects.all()
     serializer_class = PlaylistItemSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class FollowedChannelViewSet(mixins.CreateModelMixin,
+                             mixins.DestroyModelMixin,
+                             viewsets.GenericViewSet):
+    queryset = FollowedChannel.objects.all()
+    serializer_class = FollowedChannelSerializer
     permission_classes = [IsAuthenticated]

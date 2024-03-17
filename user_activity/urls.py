@@ -1,9 +1,18 @@
-from rest_framework import routers
-from .views import *
-router = routers.DefaultRouter()
-router.register(r'comments', CommentViewSet)
-router.register(r'likes', LikeViewSet)
-router.register(r'playlists', PlaylistViewSet)
-router.register(r'playlist-items', PlaylistItemViewSet)
+from rest_framework.routers import DefaultRouter
+from django.urls import path
+from .views import (
+    CommentViewSet,
+    LikeViewSet,
+    PlaylistViewSet,
+    PlaylistItemViewSet,
+    FollowedChannelViewSet,
+)
+
+router = DefaultRouter()
+router.register(r'comments', CommentViewSet, basename='comment')
+router.register(r'likes', LikeViewSet, basename='like')
+router.register(r'playlists', PlaylistViewSet, basename='playlist')
+router.register(r'playlist-items', PlaylistItemViewSet, basename='playlistitem')
+router.register(r'followed-channels', FollowedChannelViewSet, basename='followedchannel')
 
 urlpatterns = router.urls
