@@ -25,19 +25,21 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+
     # Trusted Apps
     'rest_framework',
     'rest_framework.authtoken',
     'django_filters',
     'rest_framework_simplejwt',
+    'rest_framework_swagger',
 
 
     # My Apps
-    'home',
-    'content',
-    'user_activity',
-    'user_panel',
-    'logger',
+    'home.apps.HomeConfig',
+    'content.apps.ContentConfig',
+    'user_activity.apps.UserActivityConfig',
+    'user_panel.apps.UserPanelConfig',
+    'logger.apps.LoggerConfig',
 ]
 
 MIDDLEWARE = [

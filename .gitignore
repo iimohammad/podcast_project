@@ -5,7 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
-
+Python_Web_API_Project3/
 # Distribution / packaging
 .Python
 build/
